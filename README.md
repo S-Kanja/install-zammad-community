@@ -22,6 +22,6 @@ Execute-o:
 
 E por ultimo, mais não mais importante:
 
-* Aguarde cerca de 5 a 10 minutos para todos os serviços iniciarem, o que costuma causar delay é o elasticsearch
+Aguarde cerca de 5 a 10 minutos para todos os serviços iniciarem, o que costuma causar delay é o elasticsearch
 E por isto foi criado no script um serviço de redundancia para inicia-lo, aguarde pacientemente! 
 Após ter seguido estes passos o ZAMMAD COMMUNITY estará pronto para configurar via INTERFACE GRAFICA de acordo com sua necessidade.
