@@ -4,6 +4,8 @@ INSTRUÇÕES DE USO:
 
 Baixando,descompactando o script e entrando no diretório:
 
+* sudo apt install zip -y
+
 * wget https://github.com/erickalmeida-it/install-zammad-community/archive/master.zip
 
 * unzip master.zip
