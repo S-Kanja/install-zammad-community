@@ -5,13 +5,13 @@
 # Ultima Modificacao: 26/08/2020
 # Compativél com o Ubuntu 18.04 (Homologado)
 
-echo -e "\e[01;31m             SCRIPT DE INSTALAÇÃO PARA O ZAMMAD COMMUNITY - INTERATIVO - UBUNTU SERVER 18.04     \e[00m"
+echo -e "\e[01;31m             INSTALLATION SCRIPT FOR THE ZAMMAD COMMUNITY - INTERACTIVE - UBUNTU SERVER 18.04     \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para iniciar...                             \e[00m"
 read #pausa até que o ENTER seja pressionado
 
 # ATUALIZAR REPOSITÓRIOS,PACOTES E A DISTRIBUIÇÃO DO SISTEMA OPERACIONAL
 
-echo -e "\e[01;31m                  ATUALIZANDO PACOTES,REPOSITÓRIOS E A DISTRIBUIÇÃO DO SISTEMA OPERACIONAL       \e[00m"
+echo -e "\e[01;31m                  PROVIDING REPOSITORS AND OPERATIONAL SYSTEM DISTRIBUTION       \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                           \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -21,7 +21,7 @@ apt dist-upgrade -y
 
 # INSTALAR DE DEPENDENCIAS INICIAIS
 
-echo -e "\e[01;31m                                     INSTALANDO DEPENDENCIAS INICIAIS                            \e[00m"
+echo -e "\e[01;31m                                     INSTALLING INITIAL DEPENDENCIES                         \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                           \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -42,7 +42,7 @@ sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
 
 # ATUALIZAR O SERVIÇO DO ELASTICSEARCH   
 
-echo -e "\e[01;31m                                   ATUALIZANDO O SERVIÇO DO ELASTICSEARCH                      \e[00m"
+echo -e "\e[01;31m                          ADDING REPOSITORY AND INSTALLING ELASTICSEARCH AND OPENJDK8                    \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                         \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -51,7 +51,7 @@ sudo systemctl enable elasticsearch
 
 # ADICIONAR REPOSITORIOS DO ZAMMAD COMMUNITY   
 
-echo -e "\e[01;31m                              ADICIONANDO OS REPOSITORIOS DO ZAMMAD COMMUNITY                  \e[00m"
+echo -e "\e[01;31m                              ADDING THE ZAMMAD COMMUNITY REPOSITORIES
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                         \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -60,7 +60,7 @@ wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
 sudo wget -O /etc/apt/sources.list.d/zammad.list https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/18.04.repo
 
 
-echo -e "\e[01;31m                          ATUALIZANDO REPOSITORIO E INSTALANDO ZAMMAD COMMUNITY                \e[00m"
+echo -e "\e[01;31m                         UPDATING REPOSITORY AND INSTALLING ZAMMAD COMMUNITY              \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                         \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -69,17 +69,14 @@ sudo apt-get install zammad -y
 
 # AJUSTES DE REDE
 
-echo -e "\e[01;31m                                         EFETUANDO AJUSTES DE REDE                             \e[00m"
+echo -e "\e[01;31m                                        MAKING NETWORK ADJUSTMENTS                            \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                         \e[00m"
 read #pausa até que o ENTER seja pressionado
+# shis Should Be Tested
 
-sed -i 's/listen 80;/listen 70;/g' /etc/nginx/sites-enabled/zammad.conf
+sed -i 's/server_name localhost;/server_name localhost;/g' /etc/nginx/sites-enabled/zammad.conf
 
-sed -i 's/listen 80;/listen 70;/g' /etc/nginx/sites-available/zammad.conf
-
-sed -i 's/server_name localhost;/server_name localhost:70;/g' /etc/nginx/sites-enabled/zammad.conf
-
-sed -i 's/server_name localhost;/server_name localhost:70;/g' /etc/nginx/sites-available/zammad.conf
+sed -i 's/server_name localhost;/server_name localhost;/g' /etc/nginx/sites-available/zammad.conf
 
 sudo systemctl reload nginx
 
@@ -129,7 +126,7 @@ systemctl start elasticforce.service
 
 # INSTALAR DE PLUGINS PARA O ZAMMAD COMMUNITY 
 
-echo -e "\e[01;31m                       SERÁ EFETUADO A INSTALAÇÃO DOS PLUGINS DO ZAMMAD COMMUNITY             \e[00m"
+echo -e "\e[01;31m                                ZAMMAD COMMUNITY PLUGINS WILL BE INSTALLED             \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                        \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -138,7 +135,7 @@ sudo zammad run rake searchindex:rebuild
 
 # EFETUAR AJUSTE DE FIREWALL
 
-echo -e "\e[01;31m                                             AJUSTANDO FIREWALL                               \e[00m"
+echo -e "\e[01;31m                                                  FIREWALL                               \e[00m"
 echo -e "\e[01;31m                                       Tecle <ENTER> para continuar...                        \e[00m"
 read #pausa até que o ENTER seja pressionado
 
@@ -148,8 +145,8 @@ ufw allow 80
 ufw allow 443
 ufw allow 70
 
-echo -e "\e[01;31m              A INSTALAÇÃO SUCEDEU BEM, SEU SERVIDOR SERÁ REINICIADO E PODERÁS UTILIZAR O ZAMMAD COMMUNITY     \e[00m"
-echo -e "\e[01;31m                                 EM SEU NAVEGADOR ACESSE http://IPDOSEUSERVIDOR:70                             \e[00m"
+echo -e "\e[01;31m            THE INSTALLATION HAPPENED WELL, YOUR SERVER WILL BE RESTARTED AND YOU WILL BE ABLE TO USE THE ZAMMAD COMMUNITY     \e[00m"
+echo -e "\e[01;31m                                 IN YOUR BROWSER ACCESS http: //  http://IPDOSEUSERVIDOR                            \e[00m"
 echo -e "\e[01;31m                                           Tecle <ENTER> para encerrar...                                      \e[00m"
 read #pausa até que o ENTER seja pressionado
 
